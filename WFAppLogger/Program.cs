@@ -20,7 +20,7 @@ namespace WFAppLogger
         static void Main()
         {
             // FYI: the roaming configuration that applies to the current user is at
-            // %USERPROFILE%\Local Settings\Application Data\<Company Name>\<appdomainname>_<eid>_<hash>\<version>\user.config
+            // %LOCALAPPDATA%\\<Company Name>\<appdomainname>_<eid>_<hash>\<version>\user.config
             //string userConfig = System.Configuration.ConfigurationManager.OpenExeConfiguration(
             //    System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath;
             // If no user.config file exists, then the application.exe.config file is used
@@ -43,6 +43,7 @@ namespace WFAppLogger
                 builder
                     .AddConfiguration(configuration)
                     .AddConsole();
+                    //.AddFile(o => o.RootPath = AppContext.BaseDirectory);
             });
 
             // Create logger for Program class and log that we're starting up
