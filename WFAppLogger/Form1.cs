@@ -7,10 +7,10 @@ namespace WFAppLogger
     public partial class Form1 : Form
     {
         private readonly ILogger logger;
-        public Form1()
+        public Form1(ILogger Logger)
         {
-            // Create Logger for our class
-            logger = Program.CreateLogger<Form1>();
+            // Save Logger for our class
+            logger = Logger;
             logger.LogTrace("Entering {Method}()", "ProjectForm");
             // Run designer code
             InitializeComponent();

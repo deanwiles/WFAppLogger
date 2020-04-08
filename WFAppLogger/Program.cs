@@ -1,16 +1,15 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Windows.Forms;
 using WFAppLogger.Properties;
 
 namespace WFAppLogger
 {
-    class Program
+    internal class Program
     {
-        // Global Logger factory
-        static ILoggerFactory loggerFactory;
-        // Logger instance for logging from global exception handlers
-        static ILogger logger;
+        // Global Service Collection for dependency injection
+        static IServiceCollection services;
 
         /// <summary>
         /// The main entry point for the application.
@@ -18,8 +17,9 @@ namespace WFAppLogger
         [STAThread]
         static void Main()
         {
-            // Initialize application logging using settins in App.config
-            loggerFactory = LoggerFactory.Create(builder =>
+            // Initialize application logging with dependency injection using settings in App.config
+            services = new ServiceCollection();
+            services.AddLogging(builder =>
             {
                 builder
                     .AddFilter("Microsoft", Settings.Default.LogLevelMicrosoft)
@@ -27,14 +27,16 @@ namespace WFAppLogger
                     .AddFilter("WFAppLogger", Settings.Default.LogLevelWFAppLogger)
                     .AddConsole();
             });
-            logger = loggerFactory.CreateLogger<Program>();
+
+            // Create logger for Program class and log that we're starting up
+            var logger = CreateLogger<Program>();
             logger.LogInformation($"Starting {Application.ProductName}...");
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
             // Run the application
-            Application.Run(new Form1());
+            Application.Run(new Form1(CreateLogger<Form1>()));
 
             // Log that we're exiting
             logger.LogInformation($"Exiting {Application.ProductName}.");
@@ -47,8 +49,11 @@ namespace WFAppLogger
         /// <returns>The Microsoft.Extensions.Logging.ILogger that was created</returns>
         public static ILogger<T> CreateLogger<T>()
         {
-            // Create and return Logger instance for the given type using global logger factory
-            return loggerFactory.CreateLogger<T>();
+            // Create and return Logger instance for the given type using global dependency injection for logger factory
+            using (ServiceProvider sp = services.BuildServiceProvider())
+            { 
+                return sp.GetRequiredService<ILoggerFactory>().CreateLogger<T>();
+            }
         }
     }
 }
