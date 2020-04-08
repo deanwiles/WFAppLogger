@@ -25,42 +25,6 @@ namespace WFAppLogger.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Warning")]
-        public global::Microsoft.Extensions.Logging.LogLevel LogLevelMicrosoft {
-            get {
-                return ((global::Microsoft.Extensions.Logging.LogLevel)(this["LogLevelMicrosoft"]));
-            }
-            set {
-                this["LogLevelMicrosoft"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Warning")]
-        public global::Microsoft.Extensions.Logging.LogLevel LogLevelSystem {
-            get {
-                return ((global::Microsoft.Extensions.Logging.LogLevel)(this["LogLevelSystem"]));
-            }
-            set {
-                this["LogLevelSystem"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Trace")]
-        public global::Microsoft.Extensions.Logging.LogLevel LogLevelWFAppLogger {
-            get {
-                return ((global::Microsoft.Extensions.Logging.LogLevel)(this["LogLevelWFAppLogger"]));
-            }
-            set {
-                this["LogLevelWFAppLogger"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Sample log message")]
         public string DefaultLogMessage {
             get {
@@ -75,12 +39,15 @@ namespace WFAppLogger.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <Logging>
+  <LogLevel>
+    <WFAppLogger>Trace</WFAppLogger>
+    <Default>Debug</Default>
+    <Microsoft>Warning</Microsoft>
+    <System>Warning</System>
+  </LogLevel>
   <File>
     <IncludeScopes>true</IncludeScopes>
     <BasePath>Logs</BasePath>
-    <LogLevel>
-      <Default>Trace</Default>
-    </LogLevel>
     <Files>
       <Path>&lt;appname&gt;-&lt;counter:000&gt;.log</Path>
       <MaxFileSize>10000</MaxFileSize>

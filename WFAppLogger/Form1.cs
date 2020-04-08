@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
 using System.Windows.Forms;
+using WFAppLogger.Properties;
 
 namespace WFAppLogger
 {
@@ -20,9 +21,11 @@ namespace WFAppLogger
         private void BtnLogMessage_Click(object sender, EventArgs e)
         {
             logger.LogTrace("Entering {Method}()", "BtnLogMessage_Click");
-            // Log user message
+            // Conditionally log user message (if Debug set)
             string message = txtMessage.Text;
-            logger.LogInformation("Message='{Message}'", message);
+            logger.LogDebug("Message='{Message}'", message);
+            // Save last user message (bound to Settings.Default.DefaultLogMessage)
+            Settings.Default.Save();
             logger.LogTrace("Exiting {Method}()", "BtnLogMessage_Click");
         }
     }

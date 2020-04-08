@@ -1,6 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
+using System.IO;
 using System.Windows.Forms;
 using WFAppLogger.Properties;
 
@@ -17,14 +19,21 @@ namespace WFAppLogger
         [STAThread]
         static void Main()
         {
+            // Get logging configuration from settings in App.config (or User.config)
+            var fileLoggerConfig = Settings.Default.FileLoggerConfig;
+            var stream = new MemoryStream();
+            fileLoggerConfig.Save(stream);
+            stream.Position = 0;
+            var configuration = new ConfigurationBuilder()
+                .AddXmlStream(stream)
+                .Build();
+
             // Initialize application logging with dependency injection using settings in App.config
             services = new ServiceCollection();
             services.AddLogging(builder =>
             {
                 builder
-                    .AddFilter("Microsoft", Settings.Default.LogLevelMicrosoft)
-                    .AddFilter("System", Settings.Default.LogLevelSystem)
-                    .AddFilter("WFAppLogger", Settings.Default.LogLevelWFAppLogger)
+                    .AddConfiguration(configuration)
                     .AddConsole();
             });
 
