@@ -20,15 +20,15 @@ namespace WFAppLogger
         static void Main()
         {
             // Get logging configuration from settings in App.config (or User.config)
-            var fileLoggerConfig = Settings.Default.FileLoggerConfig;
+            var loggingConfig = Settings.Default.LoggingConfig;
             var stream = new MemoryStream();
-            fileLoggerConfig.Save(stream);
+            loggingConfig.Save(stream);
             stream.Position = 0;
             var configuration = new ConfigurationBuilder()
                 .AddXmlStream(stream)
                 .Build();
 
-            // Initialize application logging with dependency injection using settings in App.config
+            // Initialize application logging via dependency injection
             services = new ServiceCollection();
             services.AddLogging(builder =>
             {

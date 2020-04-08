@@ -54,12 +54,12 @@ namespace WFAppLogger.Properties {
     </Files>
   </File>
 </Logging>")]
-        public global::System.Xml.XmlDocument FileLoggerConfig {
+        public global::System.Xml.XmlDocument LoggingConfig {
             get {
-                return ((global::System.Xml.XmlDocument)(this["FileLoggerConfig"]));
+                return ((global::System.Xml.XmlDocument)(this["LoggingConfig"]));
             }
             set {
-                this["FileLoggerConfig"] = value;
+                this["LoggingConfig"] = value;
             }
         }
     }

@@ -5,7 +5,7 @@
     <Setting Name="DefaultLogMessage" Type="System.String" Scope="User">
       <Value Profile="(Default)">Sample log message</Value>
     </Setting>
-    <Setting Name="FileLoggerConfig" Type="System.Xml.XmlDocument" Scope="User">
+    <Setting Name="LoggingConfig" Type="System.Xml.XmlDocument" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;Logging&gt;
   &lt;LogLevel&gt;
