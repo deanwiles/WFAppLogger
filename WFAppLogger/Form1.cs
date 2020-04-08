@@ -24,7 +24,7 @@ namespace WFAppLogger
             // Conditionally log user message (if Debug set)
             string message = txtMessage.Text;
             logger.LogDebug("Message='{Message}'", message);
-            // Save last user message (bound to Settings.Default.DefaultLogMessage)
+            // Save last user message (bound to Settings.Default.DefaultLogMessage) in user.config
             Settings.Default.Save();
             logger.LogTrace("Exiting {Method}()", "BtnLogMessage_Click");
         }

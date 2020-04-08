@@ -19,7 +19,15 @@ namespace WFAppLogger
         [STAThread]
         static void Main()
         {
-            // Get logging configuration from settings in App.config (or User.config)
+            // FYI: the roaming configuration that applies to the current user is at
+            // %USERPROFILE%\Local Settings\Application Data\<Company Name>\<appdomainname>_<eid>_<hash>\<version>\user.config
+            //string userConfig = System.Configuration.ConfigurationManager.OpenExeConfiguration(
+            //    System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath;
+            // If no user.config file exists, then the application.exe.config file is used
+            //string appConfig = System.Configuration.ConfigurationManager.OpenExeConfiguration(
+            //    System.Configuration.ConfigurationUserLevel.None).FilePath;
+
+            // Get logging configuration from settings in app.config (or user.config)
             var loggingConfig = Settings.Default.LoggingConfig;
             var stream = new MemoryStream();
             loggingConfig.Save(stream);
