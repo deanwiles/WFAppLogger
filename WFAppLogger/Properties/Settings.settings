@@ -14,5 +14,21 @@
     <Setting Name="DefaultLogMessage" Type="System.String" Scope="User">
       <Value Profile="(Default)">Sample log message</Value>
     </Setting>
+    <Setting Name="FileLoggerConfig" Type="System.Xml.XmlDocument" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;Logging&gt;
+  &lt;File&gt;
+    &lt;IncludeScopes&gt;true&lt;/IncludeScopes&gt;
+    &lt;BasePath&gt;Logs&lt;/BasePath&gt;
+    &lt;LogLevel&gt;
+      &lt;Default&gt;Trace&lt;/Default&gt;
+    &lt;/LogLevel&gt;
+    &lt;Files&gt;
+      &lt;Path&gt;&amp;lt;appname&amp;gt;-&amp;lt;counter:000&amp;gt;.log&lt;/Path&gt;
+      &lt;MaxFileSize&gt;10000&lt;/MaxFileSize&gt;
+    &lt;/Files&gt;
+  &lt;/File&gt;
+&lt;/Logging&gt;</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

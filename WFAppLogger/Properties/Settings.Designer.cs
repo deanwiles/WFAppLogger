@@ -70,5 +70,30 @@ namespace WFAppLogger.Properties {
                 this["DefaultLogMessage"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<Logging>
+  <File>
+    <IncludeScopes>true</IncludeScopes>
+    <BasePath>Logs</BasePath>
+    <LogLevel>
+      <Default>Trace</Default>
+    </LogLevel>
+    <Files>
+      <Path>&lt;appname&gt;-&lt;counter:000&gt;.log</Path>
+      <MaxFileSize>10000</MaxFileSize>
+    </Files>
+  </File>
+</Logging>")]
+        public global::System.Xml.XmlDocument FileLoggerConfig {
+            get {
+                return ((global::System.Xml.XmlDocument)(this["FileLoggerConfig"]));
+            }
+            set {
+                this["FileLoggerConfig"] = value;
+            }
+        }
     }
 }
