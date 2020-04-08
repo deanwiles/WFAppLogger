@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="WFAppLogger.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="LogLevelMicrosoft" Type="Microsoft.Extensions.Logging.LogLevel" Scope="User">
+      <Value Profile="(Default)">Warning</Value>
+    </Setting>
+    <Setting Name="LogLevelSystem" Type="Microsoft.Extensions.Logging.LogLevel" Scope="User">
+      <Value Profile="(Default)">Warning</Value>
+    </Setting>
+    <Setting Name="LogLevelWFAppLogger" Type="Microsoft.Extensions.Logging.LogLevel" Scope="User">
+      <Value Profile="(Default)">Trace</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
