@@ -58,5 +58,17 @@ namespace WFAppLogger.Properties {
                 this["LogLevelWFAppLogger"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Sample log message")]
+        public string DefaultLogMessage {
+            get {
+                return ((string)(this["DefaultLogMessage"]));
+            }
+            set {
+                this["DefaultLogMessage"] = value;
+            }
+        }
     }
 }

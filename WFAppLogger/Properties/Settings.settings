@@ -11,5 +11,8 @@
     <Setting Name="LogLevelWFAppLogger" Type="Microsoft.Extensions.Logging.LogLevel" Scope="User">
       <Value Profile="(Default)">Trace</Value>
     </Setting>
+    <Setting Name="DefaultLogMessage" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Sample log message</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
