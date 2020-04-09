@@ -48,9 +48,22 @@ namespace WFAppLogger
                 builder.AddFile(o => o.RootPath = AppContext.BaseDirectory);
             });
 
+            using (ServiceProvider sp = services.BuildServiceProvider())
+            {
+                // create logger
+                ILogger<Program> logger = sp.GetRequiredService<ILoggerFactory>().CreateLogger<Program>();
+
+                logger.LogTrace("This is a trace message. Should be discarded.");
+                logger.LogDebug("This is a debug message. Should be discarded.");
+                logger.LogInformation("This is an info message. Should go into 'info.log' only.");
+                logger.LogWarning("This is a warning message. Should go into 'warn+err.log' only.");
+                logger.LogError("This is an error message. Should go into 'warn+err.log' only.");
+                logger.LogCritical("This is a critical message. Should go into 'warn+err.log' only.");
+            }
+
             // Create logger for Program class and log that we're starting up
-            var logger = CreateLogger<Program>();
-            logger.LogInformation($"Starting {Application.ProductName}...");
+            var logger2 = CreateLogger<Program>();
+            logger2.LogInformation($"Starting {Application.ProductName}...");
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -59,7 +72,7 @@ namespace WFAppLogger
             Application.Run(new Form1(CreateLogger<Form1>()));
 
             // Log that we're exiting
-            logger.LogInformation($"Exiting {Application.ProductName}.");
+            logger2.LogInformation($"Exiting {Application.ProductName}.");
         }
 
         /// <summary>
@@ -70,10 +83,15 @@ namespace WFAppLogger
         public static ILogger<T> CreateLogger<T>()
         {
             // Create and return Logger instance for the given type using global dependency injection for logger factory
+#if (false)
             using (ServiceProvider sp = services.BuildServiceProvider())
-            { 
+            {
                 return sp.GetRequiredService<ILoggerFactory>().CreateLogger<T>();
             }
+#else
+            ServiceProvider sp = services.BuildServiceProvider();
+            return sp.GetRequiredService<ILoggerFactory>().CreateLogger<T>();
+#endif
         }
     }
 }
