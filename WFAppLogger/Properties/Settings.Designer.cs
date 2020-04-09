@@ -41,11 +41,14 @@ namespace WFAppLogger.Properties {
 <Root>
   <Logging>
     <LogLevel>
-      <WFAppLogger>Trace</WFAppLogger>
       <Default>Debug</Default>
+      <WFAppLogger>Trace</WFAppLogger>
       <Microsoft>Warning</Microsoft>
       <System>Warning</System>
     </LogLevel>
+    <Console>
+      <IncludeScopes>true</IncludeScopes>
+    </Console>
     <File>
       <IncludeScopes>true</IncludeScopes>
       <BasePath>Logs</BasePath>

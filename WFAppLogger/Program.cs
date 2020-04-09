@@ -35,16 +35,17 @@ namespace WFAppLogger
             var configuration = new ConfigurationBuilder()
                 .AddXmlStream(stream)
                 .Build();
+            var config = configuration.GetSection("Logging");
 
             // Initialize application logging via dependency injection
             services = new ServiceCollection();
             services.AddLogging(builder =>
             {
-                builder
-                    .AddConfiguration(configuration.GetSection("Logging"))
-                    .AddConsole()
-                    .AddFile(o => o.RootPath = AppContext.BaseDirectory)
-                    ;
+                builder.AddConfiguration(config);
+
+                builder.AddConsole();
+
+                builder.AddFile(o => o.RootPath = AppContext.BaseDirectory);
             });
 
             // Create logger for Program class and log that we're starting up

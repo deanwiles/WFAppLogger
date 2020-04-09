@@ -10,11 +10,14 @@
 &lt;Root&gt;
   &lt;Logging&gt;
     &lt;LogLevel&gt;
-      &lt;WFAppLogger&gt;Trace&lt;/WFAppLogger&gt;
       &lt;Default&gt;Debug&lt;/Default&gt;
+      &lt;WFAppLogger&gt;Trace&lt;/WFAppLogger&gt;
       &lt;Microsoft&gt;Warning&lt;/Microsoft&gt;
       &lt;System&gt;Warning&lt;/System&gt;
     &lt;/LogLevel&gt;
+    &lt;Console&gt;
+      &lt;IncludeScopes&gt;true&lt;/IncludeScopes&gt;
+    &lt;/Console&gt;
     &lt;File&gt;
       &lt;IncludeScopes&gt;true&lt;/IncludeScopes&gt;
       &lt;BasePath&gt;Logs&lt;/BasePath&gt;
