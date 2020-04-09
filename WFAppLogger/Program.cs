@@ -45,6 +45,7 @@ namespace WFAppLogger
 
                 builder.AddConsole();
 
+                // Utilize Karambolo.Extensions.Logging.File from https://github.com/adams85/filelogger
                 builder.AddFile(o => o.RootPath = AppContext.BaseDirectory);
             });
             serviceProvider = services.BuildServiceProvider();
