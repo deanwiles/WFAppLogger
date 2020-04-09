@@ -10,8 +10,6 @@ namespace WFAppLogger
 {
     internal class Program
     {
-        // Global Service Collection for dependency injection
-        //static IServiceCollection services;
         // Global Logger factory
         static ILoggerFactory loggerFactory;
 
@@ -51,22 +49,8 @@ namespace WFAppLogger
                 builder.AddFile(o => o.RootPath = AppContext.BaseDirectory);
             });
 
-            //using (ServiceProvider sp = services.BuildServiceProvider())
-            var logger = CreateLogger<Program>();
-            {
-                // create logger
-                //ILogger<Program> logger = sp.GetRequiredService<ILoggerFactory>().CreateLogger<Program>();
-
-                logger.LogTrace("This is a trace message. Should be discarded.");
-                logger.LogDebug("This is a debug message. Should be discarded.");
-                logger.LogInformation("This is an info message. Should go into 'info.log' only.");
-                logger.LogWarning("This is a warning message. Should go into 'warn+err.log' only.");
-                logger.LogError("This is an error message. Should go into 'warn+err.log' only.");
-                logger.LogCritical("This is a critical message. Should go into 'warn+err.log' only.");
-            }
-
             // Create logger for Program class and log that we're starting up
-            //var logger = CreateLogger<Program>();
+            var logger = CreateLogger<Program>();
             logger.LogInformation($"Starting {Application.ProductName}...");
 
             Application.EnableVisualStyles();
@@ -86,16 +70,6 @@ namespace WFAppLogger
         /// <returns>The Microsoft.Extensions.Logging.ILogger that was created</returns>
         public static ILogger<T> CreateLogger<T>()
         {
-            // Create and return Logger instance for the given type using global dependency injection for logger factory
-#if (false)
-            using (ServiceProvider sp = services.BuildServiceProvider())
-            {
-                return sp.GetRequiredService<ILoggerFactory>().CreateLogger<T>();
-            }
-#else
-            //ServiceProvider sp = services.BuildServiceProvider();
-            //return sp.GetRequiredService<ILoggerFactory>().CreateLogger<T>();
-#endif
             // Create and return Logger instance for the given type using global logger factory
             return loggerFactory.CreateLogger<T>();
         }
