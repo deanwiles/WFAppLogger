@@ -46,19 +46,19 @@ namespace WFAppLogger
                 builder.AddConsole();
 
                 // Utilize Karambolo.Extensions.Logging.File from https://github.com/adams85/filelogger
-                builder.AddFile(o => o.RootPath = AppContext.BaseDirectory);
+                builder.AddFile<CustomFileLoggerProvider>(configure: o => o.RootPath = Path.GetTempPath());
             });
             serviceProvider = services.BuildServiceProvider();
 
             // Create logger for Program class and log that we're starting up
             var logger = CreateLogger<Program>();
+            logger.LogInformation($"Starting {Application.ProductName}...");
             logger.LogTrace("This is a trace message.");
             logger.LogDebug("This is a debug message.");
             logger.LogInformation("This is an info message.");
             logger.LogWarning("This is a warning message.");
             logger.LogError("This is an error message.");
             logger.LogCritical("This is a critical message.");
-            logger.LogInformation($"Starting {Application.ProductName}...");
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

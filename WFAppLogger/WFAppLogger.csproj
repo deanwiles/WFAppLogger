@@ -142,6 +142,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomFileLoggerProcessor.cs" />
+    <Compile Include="CustomFileLoggerProvider.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

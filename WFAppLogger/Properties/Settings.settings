@@ -20,10 +20,13 @@
     &lt;/Console&gt;
     &lt;File&gt;
       &lt;IncludeScopes&gt;true&lt;/IncludeScopes&gt;
-      &lt;BasePath&gt;Logs&lt;/BasePath&gt;
+      &lt;!-- Log files will be written to %TEMP%[\%BasePath%]\&lt;appname&gt;-&lt;date&gt;-&lt;counter&gt;.log --&gt;
+      &lt;!--&lt;BasePath&gt;Logs&lt;/BasePath&gt;--&gt;
       &lt;Files&gt;
-        &lt;Path&gt;&amp;lt;appname&amp;gt;-&amp;lt;counter:000&amp;gt;.log&lt;/Path&gt;
-        &lt;MaxFileSize&gt;10000&lt;/MaxFileSize&gt;
+        &lt;File&gt;
+          &lt;Path&gt;&amp;lt;appname&amp;gt;-&amp;lt;date&amp;gt;-&amp;lt;counter:000&amp;gt;.log&lt;/Path&gt;
+          &lt;MaxFileSize&gt;100000&lt;/MaxFileSize&gt;
+        &lt;/File&gt;
       &lt;/Files&gt;
     &lt;/File&gt;
   &lt;/Logging&gt;
