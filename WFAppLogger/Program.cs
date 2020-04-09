@@ -11,7 +11,9 @@ namespace WFAppLogger
     internal class Program
     {
         // Global Service Collection for dependency injection
-        static IServiceCollection services;
+        //static IServiceCollection services;
+        // Global Logger factory
+        static ILoggerFactory loggerFactory;
 
         /// <summary>
         /// The main entry point for the application.
@@ -38,8 +40,9 @@ namespace WFAppLogger
             var config = configuration.GetSection("Logging");
 
             // Initialize application logging via dependency injection
-            services = new ServiceCollection();
-            services.AddLogging(builder =>
+            //services = new ServiceCollection();
+            //services.AddLogging(builder =>
+            loggerFactory = LoggerFactory.Create(builder =>
             {
                 builder.AddConfiguration(config);
 
@@ -48,10 +51,11 @@ namespace WFAppLogger
                 builder.AddFile(o => o.RootPath = AppContext.BaseDirectory);
             });
 
-            using (ServiceProvider sp = services.BuildServiceProvider())
+            //using (ServiceProvider sp = services.BuildServiceProvider())
+            var logger = CreateLogger<Program>();
             {
                 // create logger
-                ILogger<Program> logger = sp.GetRequiredService<ILoggerFactory>().CreateLogger<Program>();
+                //ILogger<Program> logger = sp.GetRequiredService<ILoggerFactory>().CreateLogger<Program>();
 
                 logger.LogTrace("This is a trace message. Should be discarded.");
                 logger.LogDebug("This is a debug message. Should be discarded.");
@@ -62,8 +66,8 @@ namespace WFAppLogger
             }
 
             // Create logger for Program class and log that we're starting up
-            var logger2 = CreateLogger<Program>();
-            logger2.LogInformation($"Starting {Application.ProductName}...");
+            //var logger = CreateLogger<Program>();
+            logger.LogInformation($"Starting {Application.ProductName}...");
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -72,7 +76,7 @@ namespace WFAppLogger
             Application.Run(new Form1(CreateLogger<Form1>()));
 
             // Log that we're exiting
-            logger2.LogInformation($"Exiting {Application.ProductName}.");
+            logger.LogInformation($"Exiting {Application.ProductName}.");
         }
 
         /// <summary>
@@ -89,9 +93,11 @@ namespace WFAppLogger
                 return sp.GetRequiredService<ILoggerFactory>().CreateLogger<T>();
             }
 #else
-            ServiceProvider sp = services.BuildServiceProvider();
-            return sp.GetRequiredService<ILoggerFactory>().CreateLogger<T>();
+            //ServiceProvider sp = services.BuildServiceProvider();
+            //return sp.GetRequiredService<ILoggerFactory>().CreateLogger<T>();
 #endif
+            // Create and return Logger instance for the given type using global logger factory
+            return loggerFactory.CreateLogger<T>();
         }
     }
 }
