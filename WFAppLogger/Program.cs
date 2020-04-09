@@ -10,8 +10,8 @@ namespace WFAppLogger
 {
     internal class Program
     {
-        // Global Service Collection for dependency injection
-        static IServiceCollection services;
+        // Global Service Provider for dependency injection
+        static ServiceProvider serviceProvider;
 
         /// <summary>
         /// The main entry point for the application.
@@ -38,7 +38,7 @@ namespace WFAppLogger
             var config = configuration.GetSection("Logging");
 
             // Initialize application logging via dependency injection
-            services = new ServiceCollection();
+            var services = new ServiceCollection();
             services.AddLogging(builder =>
             {
                 builder.AddConfiguration(config);
@@ -47,9 +47,16 @@ namespace WFAppLogger
 
                 builder.AddFile(o => o.RootPath = AppContext.BaseDirectory);
             });
+            serviceProvider = services.BuildServiceProvider();
 
             // Create logger for Program class and log that we're starting up
             var logger = CreateLogger<Program>();
+            logger.LogTrace("This is a trace message.");
+            logger.LogDebug("This is a debug message.");
+            logger.LogInformation("This is an info message.");
+            logger.LogWarning("This is a warning message.");
+            logger.LogError("This is an error message.");
+            logger.LogCritical("This is a critical message.");
             logger.LogInformation($"Starting {Application.ProductName}...");
 
             Application.EnableVisualStyles();
@@ -70,10 +77,7 @@ namespace WFAppLogger
         public static ILogger<T> CreateLogger<T>()
         {
             // Create and return Logger instance for the given type using global dependency injection for logger factory
-            using (ServiceProvider sp = services.BuildServiceProvider())
-            { 
-                return sp.GetRequiredService<ILoggerFactory>().CreateLogger<T>();
-            }
+            return serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger<T>();
         }
     }
 }
