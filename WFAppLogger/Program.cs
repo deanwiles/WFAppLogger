@@ -41,9 +41,10 @@ namespace WFAppLogger
             services.AddLogging(builder =>
             {
                 builder
-                    .AddConfiguration(configuration)
-                    .AddConsole();
-                    //.AddFile(o => o.RootPath = AppContext.BaseDirectory);
+                    .AddConfiguration(configuration.GetSection("Logging"))
+                    .AddConsole()
+                    .AddFile(o => o.RootPath = AppContext.BaseDirectory)
+                    ;
             });
 
             // Create logger for Program class and log that we're starting up

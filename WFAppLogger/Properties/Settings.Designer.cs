@@ -38,22 +38,24 @@ namespace WFAppLogger.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<Logging>
-  <LogLevel>
-    <WFAppLogger>Trace</WFAppLogger>
-    <Default>Debug</Default>
-    <Microsoft>Warning</Microsoft>
-    <System>Warning</System>
-  </LogLevel>
-  <File>
-    <IncludeScopes>true</IncludeScopes>
-    <BasePath>Logs</BasePath>
-    <Files>
-      <Path>&lt;appname&gt;-&lt;counter:000&gt;.log</Path>
-      <MaxFileSize>10000</MaxFileSize>
-    </Files>
-  </File>
-</Logging>")]
+<Root>
+  <Logging>
+    <LogLevel>
+      <WFAppLogger>Trace</WFAppLogger>
+      <Default>Debug</Default>
+      <Microsoft>Warning</Microsoft>
+      <System>Warning</System>
+    </LogLevel>
+    <File>
+      <IncludeScopes>true</IncludeScopes>
+      <BasePath>Logs</BasePath>
+      <Files>
+        <Path>&lt;appname&gt;-&lt;counter:000&gt;.log</Path>
+        <MaxFileSize>10000</MaxFileSize>
+      </Files>
+    </File>
+  </Logging>
+</Root>")]
         public global::System.Xml.XmlDocument LoggingConfig {
             get {
                 return ((global::System.Xml.XmlDocument)(this["LoggingConfig"]));

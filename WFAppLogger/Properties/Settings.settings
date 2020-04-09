@@ -7,22 +7,24 @@
     </Setting>
     <Setting Name="LoggingConfig" Type="System.Xml.XmlDocument" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;Logging&gt;
-  &lt;LogLevel&gt;
-    &lt;WFAppLogger&gt;Trace&lt;/WFAppLogger&gt;
-    &lt;Default&gt;Debug&lt;/Default&gt;
-    &lt;Microsoft&gt;Warning&lt;/Microsoft&gt;
-    &lt;System&gt;Warning&lt;/System&gt;
-  &lt;/LogLevel&gt;
-  &lt;File&gt;
-    &lt;IncludeScopes&gt;true&lt;/IncludeScopes&gt;
-    &lt;BasePath&gt;Logs&lt;/BasePath&gt;
-    &lt;Files&gt;
-      &lt;Path&gt;&amp;lt;appname&amp;gt;-&amp;lt;counter:000&amp;gt;.log&lt;/Path&gt;
-      &lt;MaxFileSize&gt;10000&lt;/MaxFileSize&gt;
-    &lt;/Files&gt;
-  &lt;/File&gt;
-&lt;/Logging&gt;</Value>
+&lt;Root&gt;
+  &lt;Logging&gt;
+    &lt;LogLevel&gt;
+      &lt;WFAppLogger&gt;Trace&lt;/WFAppLogger&gt;
+      &lt;Default&gt;Debug&lt;/Default&gt;
+      &lt;Microsoft&gt;Warning&lt;/Microsoft&gt;
+      &lt;System&gt;Warning&lt;/System&gt;
+    &lt;/LogLevel&gt;
+    &lt;File&gt;
+      &lt;IncludeScopes&gt;true&lt;/IncludeScopes&gt;
+      &lt;BasePath&gt;Logs&lt;/BasePath&gt;
+      &lt;Files&gt;
+        &lt;Path&gt;&amp;lt;appname&amp;gt;-&amp;lt;counter:000&amp;gt;.log&lt;/Path&gt;
+        &lt;MaxFileSize&gt;10000&lt;/MaxFileSize&gt;
+      &lt;/Files&gt;
+    &lt;/File&gt;
+  &lt;/Logging&gt;
+&lt;/Root&gt;</Value>
     </Setting>
   </Settings>
 </SettingsFile>
