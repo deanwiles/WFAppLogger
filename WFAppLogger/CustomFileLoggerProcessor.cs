@@ -12,7 +12,7 @@ namespace WFAppLogger
     /// <remarks>
     /// <para>This class leverages the lightweight <see cref="FileLogger"/> from https://github.com/adams85/filelogger
     /// and provides custom log file Path settings:</para>
-    /// <para>&lt;appname&gt;: Application Name (e.g. ** WFAppLogger**)</para>
+    /// <para>&lt;appname&gt;: Application Name (e.g. WFAppLogger)</para>
     /// <para>&lt;startdate&gt;: The <see cref="DateTime"/>that file logging was started. 
     /// It can include a standard .NET format string to be passed to <see cref="DateTime.ToString"/></para>
     /// </remarks>
