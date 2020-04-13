@@ -42,12 +42,13 @@ namespace WFAppLogger
             services.AddLogging(builder =>
             {
                 builder.AddConfiguration(config);
-
+                // Utilize Microsoft ConsoleLogger
                 builder.AddConsole();
-
                 // Utilize Karambolo.Extensions.Logging.File from https://github.com/adams85/filelogger
                 builder.AddFile<CustomFileLoggerProvider>(configure: o => o.RootPath = Path.GetTempPath());
             });
+            // Add WinForm(s) that will be created through service provider
+            services.AddScoped<Form1>();
             serviceProvider = services.BuildServiceProvider();
 
             // Create logger for Program class and log that we're starting up
@@ -64,7 +65,8 @@ namespace WFAppLogger
             Application.SetCompatibleTextRenderingDefault(false);
 
             // Run the application
-            Application.Run(new Form1(CreateLogger<Form1>()));
+            var form = GetRequiredService<Form1>();
+            Application.Run(form);
 
             // Log that we're exiting
             logger.LogInformation($"Exiting {Application.ProductName}.");
@@ -79,6 +81,18 @@ namespace WFAppLogger
         {
             // Create and return Logger instance for the given type using global dependency injection for logger factory
             return serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger<T>();
+        }
+
+        /// <summary>
+        /// Get service of type T from the System.IServiceProvider
+        /// </summary>
+        /// <typeparam name="T">The type of service object to get</typeparam>
+        /// <returns>A service object of type T</returns>
+        /// <exception cref="System.InvalidOperationException">There is no service of type T</exception>
+        public static T GetRequiredService<T>()
+        {
+            // Create and return class instance for the given type using global dependency injection
+            return serviceProvider.GetRequiredService<T>();
         }
     }
 }
