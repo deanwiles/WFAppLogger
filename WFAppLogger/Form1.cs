@@ -8,7 +8,7 @@ namespace WFAppLogger
     public partial class Form1 : Form
     {
         private readonly ILogger logger;
-        public Form1(ILogger Logger)
+        public Form1(ILogger<Form1> Logger)
         {
             // Save Logger for our class
             logger = Logger;
