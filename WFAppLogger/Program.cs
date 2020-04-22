@@ -12,6 +12,8 @@ namespace WFAppLogger
     {
         // Global Service Provider for dependency injection
         static ServiceProvider serviceProvider;
+        // Global Logger Factory
+        static ILoggerFactory loggerFactory;
 
         /// <summary>
         /// The main entry point for the application.
@@ -48,11 +50,13 @@ namespace WFAppLogger
                 builder.AddFile<CustomFileLoggerProvider>(configure: o => o.RootPath = Path.GetTempPath());
             });
             // Add WinForm(s) that will be created through service provider
-            services.AddScoped<Form1>();
+            services.AddTransient<Form1>();
 
-            // Build application objects in the context of global Service Provider
+            // Build application objects in the context of global service provider
             using (serviceProvider = services.BuildServiceProvider())
             {
+                // Create global logger factory
+                loggerFactory = GetRequiredService<ILoggerFactory>();
 
                 // Create logger for Program class and log that we're starting up
                 var logger = CreateLogger<Program>();
@@ -83,8 +87,8 @@ namespace WFAppLogger
         /// <returns>The Microsoft.Extensions.Logging.ILogger that was created</returns>
         public static ILogger<T> CreateLogger<T>()
         {
-            // Create and return Logger instance for the given type using global dependency injection for logger factory
-            return serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger<T>();
+            // Create and return Logger instance for the given type using global logger factory
+            return loggerFactory.CreateLogger<T>();
         }
 
         /// <summary>
