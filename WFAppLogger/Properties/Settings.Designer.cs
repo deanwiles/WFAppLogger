@@ -56,7 +56,7 @@ namespace WFAppLogger.Properties {
       <Files>
         <File>
           <Path>&lt;appname&gt;-&lt;startdate:yyyyMMdd-HHmmss&gt;-&lt;counter:000&gt;.log</Path>
-          <MaxFileSize>100000</MaxFileSize>
+          <MaxFileSize>100000000</MaxFileSize>
         </File>
       </Files>
     </File>

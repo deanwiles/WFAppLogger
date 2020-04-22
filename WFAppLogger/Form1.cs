@@ -12,21 +12,29 @@ namespace WFAppLogger
         {
             // Save Logger for our class
             logger = Logger;
-            logger.LogTrace("Entering {Method}()", "ProjectForm");
+            logger.TraceEntry("Logger={Logger}", nameof(Form1), Logger);    // Specify class constructor name instead of defaulting to ".ctor"
             // Run designer code
             InitializeComponent();
-            logger.LogTrace("Exiting {Method}()", "ProjectForm");
+            logger.TraceExit(methodName: nameof(Form1));
+        }
+
+        private void LogMessage(string Message)
+        {
+            logger.TraceEntry("Message='{Message}'", args: Message);    // Method name automatically derived & logged; just supply argument
+            // Conditionally log Message (if Debug set)
+            logger.LogDebug(Message);
+            logger.TraceExit();
         }
 
         private void BtnLogMessage_Click(object sender, EventArgs e)
         {
-            logger.LogTrace("Entering {Method}()", "BtnLogMessage_Click");
+            logger.TraceEntry("sender={sender}, e={e}", args: new object[] { sender, e });  // Encapsulate arguments when more than one
             // Conditionally log user message (if Debug set)
             string message = txtMessage.Text;
-            logger.LogDebug("Message='{Message}'", message);
+            LogMessage(message);
             // Save last user message (bound to Settings.Default.DefaultLogMessage) in user.config
             Settings.Default.Save();
-            logger.LogTrace("Exiting {Method}()", "BtnLogMessage_Click");
+            logger.TraceExit();
         }
     }
 }

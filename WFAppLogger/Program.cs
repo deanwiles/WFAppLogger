@@ -49,27 +49,31 @@ namespace WFAppLogger
             });
             // Add WinForm(s) that will be created through service provider
             services.AddScoped<Form1>();
-            serviceProvider = services.BuildServiceProvider();
 
-            // Create logger for Program class and log that we're starting up
-            var logger = CreateLogger<Program>();
-            logger.LogInformation($"Starting {Application.ProductName}...");
-            logger.LogTrace("This is a trace message.");
-            logger.LogDebug("This is a debug message.");
-            logger.LogInformation("This is an info message.");
-            logger.LogWarning("This is a warning message.");
-            logger.LogError("This is an error message.");
-            logger.LogCritical("This is a critical message.");
+            // Build application objects in the context of global Service Provider
+            using (serviceProvider = services.BuildServiceProvider())
+            {
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+                // Create logger for Program class and log that we're starting up
+                var logger = CreateLogger<Program>();
+                logger.LogInformation($"Starting {Application.ProductName}...");
+                logger.LogTrace("This is a trace message.");
+                logger.LogDebug("This is a debug message.");
+                logger.LogInformation("This is an info message.");
+                logger.LogWarning("This is a warning message.");
+                logger.LogError("This is an error message.");
+                logger.LogCritical("This is a critical message.");
 
-            // Run the application
-            var form = GetRequiredService<Form1>();
-            Application.Run(form);
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
 
-            // Log that we're exiting
-            logger.LogInformation($"Exiting {Application.ProductName}.");
+                // Run the application
+                var form = GetRequiredService<Form1>();
+                Application.Run(form);
+
+                // Log that we're exiting
+                logger.LogInformation($"Exiting {Application.ProductName}.");
+            }
         }
 
         /// <summary>

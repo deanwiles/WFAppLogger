@@ -25,7 +25,7 @@
       &lt;Files&gt;
         &lt;File&gt;
           &lt;Path&gt;&amp;lt;appname&amp;gt;-&amp;lt;startdate:yyyyMMdd-HHmmss&amp;gt;-&amp;lt;counter:000&amp;gt;.log&lt;/Path&gt;
-          &lt;MaxFileSize&gt;100000&lt;/MaxFileSize&gt;
+          &lt;MaxFileSize&gt;100000000&lt;/MaxFileSize&gt;
         &lt;/File&gt;
       &lt;/Files&gt;
     &lt;/File&gt;
